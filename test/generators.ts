@@ -36,5 +36,5 @@ const orderSampler = jsc.sampler(arbitraryOrder, 5);
 export const randomOrder = (overrides: Partial<Order> = {}) =>
   _.merge(orderSampler(1), overrides);
 
-console.log(randomOrder());
-console.log(randomOrder({ limitPrice: 2 }));
+randomOrder();
+randomOrder({ limitPrice: 2 });
