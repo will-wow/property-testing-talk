@@ -30,3 +30,11 @@ export const arbitraryOrderBook: jsc.Arbitrary<OrderBook> = jsc.record({
   buy: jsc.array(arbitraryOrder),
   sell: jsc.array(arbitraryOrder)
 });
+
+const orderSampler = jsc.sampler(arbitraryOrder, 5);
+
+export const randomOrder = (overrides: Partial<Order> = {}) =>
+  _.merge(orderSampler(1), overrides);
+
+console.log(randomOrder());
+console.log(randomOrder({ limitPrice: 2 }));
