@@ -4,10 +4,16 @@ import { expect } from "chai";
 import * as jsc from "jsverify";
 
 describe("addition", () => {
-  jsc.property("commutative", jsc.number, jsc.number, (n1, n2) => {
-    expect(n1 + n2).to.equal(n2 + n1);
-    return true;
+  it("is commutative", () => {
+    expect(1 + 2).to.equal(2 + 1);
   });
+
+  jsc.property(
+    "commutative",
+    jsc.number,
+    jsc.number,
+    (n1, n2) => n1 + n2 === n2 + n1
+  );
 
   jsc.property(
     "associative",
