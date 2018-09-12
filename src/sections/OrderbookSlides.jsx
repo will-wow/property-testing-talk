@@ -94,6 +94,21 @@ export default (
     </Slide>
 
     <Slide>
+      <Heading size={2} fit>
+        Arbitrary Order Generator
+      </Heading>
+
+      <CodePane textSize="2.25rem" lang="javascript" source={generatorOrder} />
+
+      <NoteList
+        notes={[
+          "jsc.record lets you generate objects with a shape",
+          "most custom generators are mix of primitives and custom"
+        ]}
+      />
+    </Slide>
+
+    <Slide>
       <Heading size={1}>Important note</Heading>
       <Heading size={3}>jsc.record() returns a generator,</Heading>
       <Heading size={3}>not a value</Heading>
@@ -111,6 +126,7 @@ export default (
       <NoteList
         notes={[
           "so arbitraryOrder isn't an order, its an object that JsVerify uses in a test to generate Orders later",
+          "can take a while to grok",
           "ok with that out of the way"
         ]}
       />
@@ -127,10 +143,11 @@ export default (
 
       <NoteList
         notes={[
+          "jsverify only gives us primitive number, which could be positive or negative",
           "Details aren't important now",
-          "jsverify only gives us jsc.number, which could be positive or negative",
-          "you can map a type into another type",
-          "you can add a filter so certain cases don't go through",
+          "you can use smap to apply a mapping function to each generated value",
+          "so Math.abs makes generated numbers always positive",
+          "suchthat lets you filter out certain values",
           "price can't be zero",
           "overuse filter makes test slower",
           "better to Math.abs instead of < 0 filter"
@@ -304,6 +321,15 @@ export default (
         That&rsquo;s Property-Based Testing!
       </Heading>
 
+      <List>
+        <ListItem>Thinking of properties can feel hard</ListItem>
+        <ListItem>But not that different from what you already do</ListItem>
+        <ListItem>
+          You already think of examples to demonstrate a property
+        </ListItem>
+        <ListItem>Just skip the example part!</ListItem>
+      </List>
+
       <NoteList notes={["that's pretty much it for property testing"]} />
     </Slide>
 
@@ -325,13 +351,25 @@ export default (
     </Slide>
 
     <Slide>
-      <Heading size={1} fit>Supplement, Not Replacement</Heading>
+      <Heading size={1} fit>
+        Supplement, Not Replacement
+      </Heading>
 
       <List>
         <ListItem>Slower than example tests</ListItem>
         <ListItem>Not as good documentation</ListItem>
         <ListItem>Hard to come up with properties</ListItem>
       </List>
+
+      <NoteList
+        notes={[
+          "Last note",
+          "slower b/c many iterations",
+          "example test is clearer documentation of how to use api for new dev",
+          "not always easy to come up with a general property",
+          "in real world use property test for important or easy to test stuff"
+        ]}
+      />
     </Slide>
 
     <Slide>

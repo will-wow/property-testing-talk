@@ -45,7 +45,6 @@ export default (
           "specifically with property-based testing"
         ]}
       />
-      <NoteList notes={[]} />
     </Slide>
 
     <Slide>
@@ -249,7 +248,8 @@ export default (
           "jsc has a 'property' method that works like 'it' or 'test'",
           "takes name, generators, body",
           "property holds true in all cases, not just one",
-          "will try 0, 1 million, negative 0.0001, etc"
+          "will try 0, 1 million, negative 0.0001, etc",
+          "also mocha integration"
         ]}
       />
     </Slide>

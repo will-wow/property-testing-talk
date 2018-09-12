@@ -1,6 +1,6 @@
-(orderBook, orderType) => {
+orderBook => {
   const bestPrice = 
-    findBestPrice(orderBook, orderType);
+    findBestPrice(orderBook, "sell");
 
   _.forEach(orderBook.sell, order => {
       expect(order.limitPrice)
