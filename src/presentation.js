@@ -6,6 +6,7 @@ import { Deck } from "spectacle";
 import createTheme from "spectacle/lib/themes/default";
 
 import IntroSlides from "./sections/IntroSlides";
+import OrderbookSlides from "./sections/OrderbookSlides";
 
 // Require CSS
 require("normalize.css");
@@ -31,6 +32,7 @@ export default class Presentation extends React.Component {
     return (
       <Deck transitionDuration={500} theme={theme} contentHeight={1000}>
         {IntroSlides}
+        {OrderbookSlides}
       </Deck>
     );
   }

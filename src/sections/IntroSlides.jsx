@@ -45,23 +45,7 @@ export default (
           "specifically with property-based testing"
         ]}
       />
-      <NoteList
-        notes={[
-          "unit tests help catch bugs, but can't find any you didn't think of",
-          "in a unit test, you write down the happy path",
-          "then use your brain to come up with all the possible edge cases, and write examples for them",
-          "but human brains are terrible at that, and also lazy",
-
-          "tension between completeness and being obvious and bored",
-
-          "Property-based testing is a technique for automating corner case detection",
-          "Comes from Haskell, but implemented in most languages",
-          "JS: JsVerify",
-          "Haskell: QuickCheck",
-          "Python: Hypothesis",
-          "Elixir: StreamData"
-        ]}
-      />
+      <NoteList notes={[]} />
     </Slide>
 
     <Slide>
@@ -131,30 +115,6 @@ export default (
     </Slide>
 
     <Slide>
-      <Heading fit size={2}>
-        Properties of Addition
-      </Heading>
-
-      <CodePane
-        textSize="2rem"
-        lang="javascript"
-        source={exampleAdditionProperties}
-      />
-
-      <NoteList
-        notes={[
-          "so if we were testing to make super sure addition worked",
-          "here are some tests",
-          "try small numbers, try big numbers",
-          "even try the 'zero' edge case",
-          "feels pretty solid",
-          "but we want to go deeper",
-          "what else could we test about addition?"
-        ]}
-      />
-    </Slide>
-
-    <Slide>
       <Heading fit size={2} textColor="tertiary">
         Properties of Addition
       </Heading>
@@ -195,7 +155,7 @@ export default (
       <NoteList
         notes={[
           "And here they are, example-based tests for the properties",
-          "feeling good about JS's implementation of addition at this point",
+          "so now addition DEFINITLY works in JS",
           "but what about floats? Is plus going to crash on 1.5?",
           "in this case, no, BUT"
         ]}
@@ -211,10 +171,12 @@ export default (
 
       <NoteList
         notes={[
-          "It's those unknown unknowns, they'll always get you",
+          "the general problem is unknown unknowns",
           "you use your brain to think of edge cases while writing tests",
           "use the same brain while implementing",
-          "things you don't think of never get caught"
+          "things you don't think of never get caught",
+          "also a tension when writing tests between completeness and being obvious and bored",
+          "all of which is to say:"
         ]}
       />
     </Slide>
@@ -234,16 +196,35 @@ export default (
         Property-Based Testing
       </Heading>
 
-      <Text>
-        Teach the computer how to generate your data structures, then it will
-        test your code a bunch of times
-      </Text>
+      <Heading fit size={2}>
+        Automated corner case detection
+      </Heading>
+
+      <List>
+        <ListItem>Generate arbitrary inputs</ListItem>
+        <ListItem>Run the test many times</ListItem>
+        <ListItem>It should always pass</ListItem>
+      </List>
+
+      <NoteList notes={["Seriously though"]} />
+    </Slide>
+
+    <Slide>
+      <Heading size={3} textColor="tertiary">
+        Most Languages have Property Testing
+      </Heading>
+
+      <List>
+        <ListItem>JS: JsVerify</ListItem>
+        <ListItem>Haskell: QuickCheck</ListItem>
+        <ListItem>Python: Hypothesis</ListItem>
+        <ListItem>Elixir: StreamData</ListItem>
+      </List>
 
       <NoteList
         notes={[
-          "Seriously though",
-          "property-based testing is a technique",
-          "trying to find every edge case"
+          "Comes from Haskell, but implemented in most languages",
+          "today we're talking about JsVerify"
         ]}
       />
     </Slide>
@@ -262,10 +243,10 @@ export default (
       <NoteList
         notes={[
           "same test of the commutative property",
+          "example test at top, property test on bottom",
           "break this down a little",
-          "Talking about JsVerify today",
-          "Based on Crockford's JsCheck, import is called jsc in the docs",
-          "jsc has a property method that works like 'it' or 'test'",
+          "JsVerify based on Crockford's JsCheck, import is called jsc in the docs",
+          "jsc has a 'property' method that works like 'it' or 'test'",
           "takes name, generators, body",
           "property holds true in all cases, not just one",
           "will try 0, 1 million, negative 0.0001, etc"
@@ -282,8 +263,10 @@ export default (
         Test the heck out of it
       </Heading>
 
-      <NoteList notes={["in general"]} />
+      <NoteList notes={["in other words..."]} />
     </Slide>
+
+    <Slide bgImage="./img/test-all.jpg" bgSize="contain" bgRepeat="no-repeat" />
 
     <Slide>
       <Heading size={2} fit>
@@ -299,37 +282,6 @@ export default (
           "web apps don't have properties written in textbook"
         ]}
       />
-    </Slide>
-
-    <Slide>
-      <Heading fit size={1}>
-        Deeper Dive
-      </Heading>
-
-      <CodePane
-        textSize="1.5rem"
-        lang="javascript"
-        source={propertyAdditionCommutative}
-      />
-
-      <NoteList notes={["Man we are so screwed"]} />
-    </Slide>
-
-    <Slide bgImage="./img/test-all.jpg" bgSize="contain" bgRepeat="no-repeat" />
-
-    <Slide>
-      <Heading size={1}>Moral of the story?</Heading>
-    </Slide>
-
-    <Slide>
-      <Heading size={1}>Don&rsquo;t think for yourself</Heading>
-    </Slide>
-
-    <Slide>
-      <Heading size={1}>Don&rsquo;t think for yourself</Heading>
-      <Heading size={1} textColor="black" fit>
-        (robots are better at it)
-      </Heading>
     </Slide>
   </SlideSet>
 );

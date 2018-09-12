@@ -12,16 +12,14 @@ const arbitraryPositiveNumber: jsc.Arbitrary<number> = jsc.suchthat(
   n => n > 0
 );
 
-const arbitraryId = jsc.asciinestring;
-
 export const arbitraryOrderType = jsc.oneof([
   jsc.constant("buy"),
   jsc.constant("sell")
 ]) as jsc.Arbitrary<OrderType>;
 
 export const arbitraryOrder: jsc.Arbitrary<Order> = jsc.record({
-  id: arbitraryId,
-  userId: arbitraryId,
+  id: jsc.asciistring,
+  userId: jsc.asciistring,
   limitPrice: arbitraryPositiveNumber,
   quantity: arbitraryPositiveNumber
 });
