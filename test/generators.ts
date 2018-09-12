@@ -18,8 +18,8 @@ export const arbitraryOrderType = jsc.oneof([
 ]) as jsc.Arbitrary<OrderType>;
 
 export const arbitraryOrder: jsc.Arbitrary<Order> = jsc.record({
-  id: jsc.asciistring,
-  userId: jsc.asciistring,
+  id: jsc.asciinestring,
+  userId: jsc.asciinestring,
   limitPrice: arbitraryPositiveNumber,
   quantity: arbitraryPositiveNumber
 });

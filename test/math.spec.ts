@@ -32,7 +32,7 @@ describe("addition", () => {
   });
 });
 
-describe.only("subtraction", () => {
+describe("subtraction", () => {
   jsc.property("commutative", jsc.number, jsc.number, (n1, n2) => {
     // This isn't right!
     expect(n1 - n2).to.equal(n2 - n1);

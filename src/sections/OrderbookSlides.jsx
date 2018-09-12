@@ -14,10 +14,15 @@ import {
 import NoteList from "../elements/NoteList";
 
 import orderBookTypes from "../code/orderBookTypes.ts";
-import generatorOrder from "../code/generatorOrder.ts";
-import generatorPositiveNumber from "../code/generatorPositiveNumber.ts";
-import generatorOrderBook from "../code/generatorOrderBook.ts";
-// import orderSampler from "../code/orderSampler.ts";
+import generatorOrder from "../code/generatorOrder.js";
+import generatorPositiveNumber from "../code/generatorPositiveNumber.js";
+import generatorOrderBook from "../code/generatorOrderBook.js";
+import exampleBestPrice from "../code/exampleBestPrice.js";
+import propertyBestPriceSetup from "../code/propertyBestPriceSetup";
+import propertyBestPriceBody from "../code/propertyBestPriceBody";
+import propertyTestError from "../code/propertyTestError.txt";
+import propertyTestPassing from "../code/propertyTestPassing.txt";
+import orderSampler from "../code/orderSampler.js";
 
 export default (
   <SlideSet>
@@ -153,18 +158,75 @@ export default (
 
     <Slide>
       <Heading fit size={2}>
-        Arbitrary OrderBooks
+        Example-Based Test:
+      </Heading>
+
+      <CodePane textSize="2rem" lang="javascript" source={exampleBestPrice} />
+
+      <NoteList
+        notes={[
+          "Here's the example-based test you might write without property testing",
+          "make an orderbook with low and high prices, and check that the best sell for a buyer is the cheapest, and the best buy for a seller is the most expensive",
+          "if this passes, could see calling it a day, BUT"
+        ]}
+      />
+    </Slide>
+
+    <Slide>
+      <Heading fit size={2}>
+        Property-Based Test Setup
       </Heading>
 
       <CodePane
         textSize="2.25rem"
         lang="javascript"
-        source={generatorOrderBook}
+        source={propertyBestPriceSetup}
+      />
+
+      <NoteList notes={["the setup code", "generate arbitrary orderbook"]} />
+    </Slide>
+
+    <Slide>
+      <Heading fit size={2}>
+        Property-Based Test Body
+      </Heading>
+
+      <CodePane
+        textSize="2.25rem"
+        lang="javascript"
+        source={propertyBestPriceBody}
       />
 
       <NoteList
         notes={[
-          "Finally, use our complicated order type to make arbitrary lists of orders"
+          "the body",
+          "get the best price from arbitrary orderbook for the type",
+          "check that FOR EVERY sell order in the orderbook, the price is as good or worse",
+          "run similar test for buy orders",
+          "not as mathematical, but valid property",
+          "annoying implementation detail: return true b/c expect throw error"
+        ]}
+      />
+    </Slide>
+
+    <Slide>
+      <Heading size={2}>Failing Test!</Heading>
+
+      <CodePane
+        textSize="1.75rem"
+        lang="javascript"
+        source={propertyTestError}
+      />
+
+      <NoteList
+        notes={[
+          "Oops! Even though example test passed, this one is failing",
+          "it tells us the sample data passed in",
+          "the second sell order is lower than the first one",
+          "in example the first was lower",
+          "bug example didn't catch - picks the first value instead of the lowest",
+          "this is a really good counterexample",
+          "note there zero buy orders, only two sell orders"
         ]}
       />
     </Slide>
@@ -192,6 +254,84 @@ export default (
       </List>
 
       <NoteList notes={["why a generator is different than factory bot"]} />
+    </Slide>
+
+    <Slide>
+      <Heading fit size={1}>
+        Low-Complexity Values:
+      </Heading>
+
+      <List>
+        <ListItem>
+          <S type="bold">number</S>: 1 and 0
+        </ListItem>
+        <ListItem>
+          <S type="bold">list</S>: []
+        </ListItem>
+        <ListItem>
+          <S type="bold">string</S>: &quot;&quot; and &quot;a&quot;
+        </ListItem>
+      </List>
+
+      <NoteList
+        notes={[
+          "low complexity primitives look like:",
+          "low complexity records are made up of"
+        ]}
+      />
+    </Slide>
+
+    <Slide>
+      <Heading size={2}>Passing Test</Heading>
+
+      <CodePane
+        textSize="2.25rem"
+        lang="javascript"
+        source={propertyTestPassing}
+      />
+
+      <NoteList
+        notes={[
+          "Given that nice counter example",
+          "fix implementation",
+          "tests passing"
+        ]}
+      />
+    </Slide>
+
+    <Slide>
+      <Heading size={2} textColor="tertiary">
+        That&rsquo;s Property-Based Testing!
+      </Heading>
+
+      <NoteList notes={["that's pretty much it for property testing"]} />
+    </Slide>
+
+    <Slide>
+      <Heading size={2} fit>
+        Arbitrary data outside of property tests
+      </Heading>
+
+      <CodePane textSize="2.25rem" lang="javascript" source={orderSampler} />
+
+      <NoteList
+        notes={[
+          "one last tip",
+          "jsc.sampler lets you use arbitrary generators in your normal unit tests too",
+          "a little helper to make overriding easier",
+          "no need for a second faker library"
+        ]}
+      />
+    </Slide>
+
+    <Slide>
+      <Heading size={1} fit>Supplement, Not Replacement</Heading>
+
+      <List>
+        <ListItem>Slower than example tests</ListItem>
+        <ListItem>Not as good documentation</ListItem>
+        <ListItem>Hard to come up with properties</ListItem>
+      </List>
     </Slide>
 
     <Slide>

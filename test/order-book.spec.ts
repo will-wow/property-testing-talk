@@ -87,20 +87,13 @@ describe("best price", () => {
   );
 
   jsc.property(
-    "safe naive best price is better than all other prices",
+    "safe naive best sell price is better than all other prices",
     Generators.arbitraryOrderBook,
-    Generators.arbitraryOrderType,
-    (orderBook: OrderBook, orderType: OrderType) => {
-      const bestPrice = safeFindNaiveBestPrice(orderBook, orderType);
+    (orderBook: OrderBook) => {
+      const bestPrice = safeFindNaiveBestPrice(orderBook, "sell");
 
-      _.forEach(orderBook[orderType], (order: Order) => {
-        if (orderType === "sell") {
-          expect(order.limitPrice).to.be.at.most(bestPrice);
-        }
-
-        if (orderType === "buy") {
-          expect(order.limitPrice).to.be.at.least(bestPrice);
-        }
+      _.forEach(orderBook.sell, (order: Order) => {
+        expect(order.limitPrice).to.be.at.most(bestPrice);
       });
       return true;
     }
